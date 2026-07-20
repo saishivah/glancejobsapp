@@ -1,0 +1,199 @@
+/* =============================================================
+   GlanceJobs — Component Library
+   Low-level reusable UI: buttons, fields, cards, badges, etc.
+   Import AFTER colors_and_type.css.
+   ============================================================= */
+
+/* -----------------------------------------------------------
+   BUTTONS
+   Two primary flavors: Signal (orange) + Ink (black). Plus ghost.
+   ----------------------------------------------------------- */
+.gj-btn {
+  --_btn-bg: var(--accent);
+  --_btn-fg: var(--gj-ink);
+  --_btn-bg-hover: var(--accent-hover);
+  --_btn-ring: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: var(--_btn-bg);
+  color: var(--_btn-fg);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-standard),
+    color var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.gj-btn:hover { background: var(--_btn-bg-hover); }
+.gj-btn:active { transform: translateY(1px); }
+.gj-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Primary: Signal orange w/ ink text */
+.gj-btn-primary {
+  --_btn-bg: var(--accent);
+  --_btn-fg: var(--gj-ink);
+  --_btn-bg-hover: var(--accent-hover);
+}
+.gj-btn-primary:hover { color: var(--gj-canvas); }
+
+/* Ink: black w/ canvas text */
+.gj-btn-ink {
+  --_btn-bg: var(--gj-ink);
+  --_btn-fg: var(--gj-canvas);
+  --_btn-bg-hover: #1a1a1a;
+}
+
+/* Secondary: canvas w/ border */
+.gj-btn-secondary {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--border-strong);
+}
+.gj-btn-secondary:hover {
+  background: var(--gj-paper);
+  border-color: var(--gj-ink);
+}
+
+/* Ghost: no chrome, underline on hover */
+.gj-btn-ghost {
+  background: transparent;
+  color: var(--fg);
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.gj-btn-ghost:hover { color: var(--accent); background: transparent; }
+
+/* Sizes */
+.gj-btn-sm { padding: 8px 14px; font-size: 13px; border-radius: var(--radius-sm); }
+.gj-btn-lg { padding: 16px 28px; font-size: 16px; border-radius: var(--radius-lg); }
+
+/* -----------------------------------------------------------
+   BADGES / CHIPS / PILLS
+   ----------------------------------------------------------- */
+.gj-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg-muted);
+  line-height: 1;
+  white-space: nowrap;
+}
+.gj-badge-dot::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+.gj-badge-sponsors   { color: #0a6b3a; background: #E8F3EC; border-color: #D1E7D9; }
+.gj-badge-no-sponsor { color: #8A2A2A; background: #FBECEC; border-color: #EED6D6; }
+.gj-badge-unknown    { color: var(--fg-muted); background: var(--gj-paper); border-color: var(--border); }
+.gj-badge-accent     { color: var(--accent); background: var(--accent-wash); border-color: #F8D9C6; }
+
+/* -----------------------------------------------------------
+   CARDS
+   White or Paper, 1px border, 12px radius, generous padding.
+   ----------------------------------------------------------- */
+.gj-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+}
+.gj-card-paper { background: var(--gj-paper); }
+.gj-card-ink   { background: var(--gj-ink); color: var(--fg-inverse); border-color: #1f1f1f; }
+.gj-card-compact { padding: 24px; }
+
+/* -----------------------------------------------------------
+   FIELDS
+   ----------------------------------------------------------- */
+.gj-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gj-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg);
+}
+.gj-input, .gj-select, .gj-textarea {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--fg);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 14px;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  width: 100%;
+  box-sizing: border-box;
+}
+.gj-input::placeholder, .gj-textarea::placeholder { color: var(--fg-subtle); }
+.gj-input:hover, .gj-select:hover, .gj-textarea:hover { border-color: var(--border-strong); }
+.gj-input:focus, .gj-select:focus, .gj-textarea:focus {
+  outline: none;
+  border-color: var(--gj-ink);
+  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.06);
+}
+
+/* -----------------------------------------------------------
+   SECTION SCAFFOLDING
+   ----------------------------------------------------------- */
+.gj-section {
+  padding: var(--space-20) var(--space-10);
+}
+.gj-section-paper { background: var(--gj-paper); }
+.gj-section-ink   { background: var(--gj-ink); color: var(--fg-inverse); }
+.gj-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* -----------------------------------------------------------
+   DIVIDERS
+   ----------------------------------------------------------- */
+.gj-hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-10) 0;
+}
+
+/* -----------------------------------------------------------
+   KBD / CODE
+   ----------------------------------------------------------- */
+.gj-kbd {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--gj-paper);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+}
+.gj-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--gj-ink-wash);
+  padding: 2px 6px;
+  border-radius: 4px;
+}

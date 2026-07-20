@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" width="32" height="32" fill="none">
+  <!--
+    GlanceJobs Favicon — 32px display, 56×56 viewBox
+    Transparent bg — works on light and dark browser tabs
+  -->
+  <path d="M4 28 C 12 14, 44 14, 52 28 C 44 42, 12 42, 4 28 Z"
+        stroke="#0a0a0a" stroke-width="3" stroke-linejoin="round" fill="none"/>
+  <rect x="20" y="22" width="16" height="12" rx="2" fill="#FF5A1F"/>
+  <rect x="24" y="19" width="8"  height="4"  rx="1" fill="#FF5A1F"/>
+  <circle cx="31" cy="25" r="1.5" fill="#fafaf7"/>
+</svg>

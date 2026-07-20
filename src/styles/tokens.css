@@ -1,0 +1,212 @@
+/* =============================================================
+   GlanceJobs Design System — Colors & Typography
+   Load Fraunces (display) + Geist (UI/body) from Google Fonts.
+   ============================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
+
+:root {
+  /* -----------------------------------------------------------
+     CORE PALETTE
+     ----------------------------------------------------------- */
+  --gj-ink:            #0A0A0A; /* primary text, dark surfaces */
+  --gj-signal:         #FF5A1F; /* single accent — scalpel, not brush */
+  --gj-ember:          #C2410C; /* deeper orange — hover/secondary */
+  --gj-paper:          #F4EFE6; /* warm cream — cards, soft sections */
+  --gj-canvas:         #FAFAF7; /* default off-white page bg */
+
+  --gj-border:         #E5E5E0;
+  --gj-border-strong:  #D4D3CC;
+  --gj-muted:          #666666; /* muted text */
+  --gj-subtle:         #999999; /* subtle text / eyebrows */
+
+  /* Rare tints — use sparingly */
+  --gj-signal-wash:    #FFF1E9; /* signal @ ~10% on canvas */
+  --gj-ink-wash:       #F1F0EC; /* very light neutral */
+
+  /* -----------------------------------------------------------
+     SEMANTIC TOKENS
+     ----------------------------------------------------------- */
+  --bg:                var(--gj-canvas);
+  --bg-soft:           var(--gj-paper);
+  --bg-inverse:        var(--gj-ink);
+
+  --fg:                var(--gj-ink);
+  --fg-muted:          var(--gj-muted);
+  --fg-subtle:         var(--gj-subtle);
+  --fg-inverse:        var(--gj-canvas);
+
+  --accent:            var(--gj-signal);
+  --accent-hover:      var(--gj-ember);
+  --accent-wash:       var(--gj-signal-wash);
+
+  --border:            var(--gj-border);
+  --border-strong:     var(--gj-border-strong);
+
+  /* -----------------------------------------------------------
+     TYPE FAMILIES
+     ----------------------------------------------------------- */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* -----------------------------------------------------------
+     TYPE SCALE (semantic)
+     Display uses Fraunces w/ tight tracking.
+     Body uses Geist.
+     ----------------------------------------------------------- */
+  --display-1-size: clamp(56px, 8vw, 112px);
+  --display-1-leading: 0.95;
+  --display-1-tracking: -0.035em;
+
+  --display-2-size: clamp(44px, 6vw, 80px);
+  --display-2-leading: 1.0;
+  --display-2-tracking: -0.03em;
+
+  --h1-size: 56px;
+  --h1-leading: 1.05;
+  --h1-tracking: -0.03em;
+
+  --h2-size: 40px;
+  --h2-leading: 1.1;
+  --h2-tracking: -0.028em;
+
+  --h3-size: 28px;
+  --h3-leading: 1.2;
+  --h3-tracking: -0.022em;
+
+  --h4-size: 20px;
+  --h4-leading: 1.3;
+  --h4-tracking: -0.015em;
+
+  --body-lg-size: 18px;
+  --body-size:    16px;
+  --body-sm-size: 14px;
+  --caption-size: 13px;
+
+  --eyebrow-size: 12px;
+  --eyebrow-tracking: 0.14em;
+
+  /* -----------------------------------------------------------
+     RADII, SPACING, SHADOWS
+     ----------------------------------------------------------- */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;   /* buttons (min) */
+  --radius-lg: 10px;  /* buttons (max) */
+  --radius-xl: 12px;  /* cards */
+  --radius-2xl: 20px;
+  --radius-pill: 999px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Shadows are restrained — we are not a drop-shadow-heavy system.
+     Prefer 1px borders. Reserve for menus/floaters. */
+  --shadow-none: none;
+  --shadow-sm:   0 1px 2px rgba(10, 10, 10, 0.04);
+  --shadow-md:   0 6px 20px -8px rgba(10, 10, 10, 0.12);
+  --shadow-lg:   0 20px 48px -16px rgba(10, 10, 10, 0.18);
+  --shadow-inset-border: inset 0 0 0 1px var(--border);
+
+  /* -----------------------------------------------------------
+     MOTION
+     ----------------------------------------------------------- */
+  --ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease-entrance: cubic-bezier(0, 0.6, 0.2, 1);
+  --ease-exit:     cubic-bezier(0.4, 0, 1, 1);
+  --dur-fast: 120ms;
+  --dur-med:  200ms;
+  --dur-slow: 320ms;
+}
+
+/* =============================================================
+   BASE RESETS + DEFAULTS
+   ============================================================= */
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: 1.55;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* =============================================================
+   SEMANTIC TYPE CLASSES
+   ============================================================= */
+.gj-display-1,
+.gj-display-2,
+.gj-h1, .gj-h2, .gj-h3, .gj-h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.gj-display-1 {
+  font-size: var(--display-1-size);
+  line-height: var(--display-1-leading);
+  letter-spacing: var(--display-1-tracking);
+  font-weight: 600;
+}
+.gj-display-2 {
+  font-size: var(--display-2-size);
+  line-height: var(--display-2-leading);
+  letter-spacing: var(--display-2-tracking);
+}
+.gj-h1 { font-size: var(--h1-size); line-height: var(--h1-leading); letter-spacing: var(--h1-tracking); }
+.gj-h2 { font-size: var(--h2-size); line-height: var(--h2-leading); letter-spacing: var(--h2-tracking); }
+.gj-h3 { font-size: var(--h3-size); line-height: var(--h3-leading); letter-spacing: var(--h3-tracking); }
+.gj-h4 { font-size: var(--h4-size); line-height: var(--h4-leading); letter-spacing: var(--h4-tracking); }
+
+.gj-body-lg { font-size: var(--body-lg-size); line-height: 1.55; }
+.gj-body    { font-size: var(--body-size);    line-height: 1.55; }
+.gj-body-sm { font-size: var(--body-sm-size); line-height: 1.5;  color: var(--fg-muted); }
+.gj-caption { font-size: var(--caption-size); line-height: 1.45; color: var(--fg-muted); }
+
+.gj-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--eyebrow-size);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--fg-subtle);
+  font-weight: 500;
+}
+
+.gj-mono { font-family: var(--font-mono); font-size: 13px; }
+
+/* =============================================================
+   INLINE UTILITIES
+   ============================================================= */
+.gj-accent  { color: var(--accent); }
+.gj-muted   { color: var(--fg-muted); }
+.gj-subtle  { color: var(--fg-subtle); }
+.gj-serif   { font-family: var(--font-display); }
+.gj-sans    { font-family: var(--font-body); }
+
+/* Link default (low-chrome; underline on hover) */
+a.gj-link {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-standard), color var(--dur-fast);
+}
+a.gj-link:hover { color: var(--accent); text-decoration-color: currentColor; }
