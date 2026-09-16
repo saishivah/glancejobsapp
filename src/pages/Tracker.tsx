@@ -5,7 +5,7 @@ import { relativeDate } from '../lib/relativeDate';
 import { AppShell } from '../components/AppShell';
 import { SponsorBadge } from '../components/SponsorBadge';
 import { StatusSelect, STATUSES } from '../components/StatusSelect';
-import { BoardViewIcon, CloseIcon, ListViewIcon, LocationIcon, PlusIcon, SearchIcon } from '../components/icons';
+import { BoardViewIcon, CloseIcon, ListViewIcon, LocationIcon, PlusIcon, SearchIcon, TrashIcon } from '../components/icons';
 import { useAddSavedJob, useRemoveSavedJob, useSavedJobs, useUpdateSavedJobStatus } from '../hooks/useSavedJobs';
 import { useSponsorStatus } from '../hooks/useSponsorStatus';
 import { useH1bSummary } from '../hooks/useH1bSummary';
@@ -235,6 +235,7 @@ function TrackerBoard() {
           sponsorLoading={sponsorQuery.isLoading}
           onOpenDetail={setDetailId}
           onStatusChange={handleStatusChange}
+          onRemove={handleRemove}
         />
       ) : (
         <ListView
@@ -243,6 +244,7 @@ function TrackerBoard() {
           sponsorLoading={sponsorQuery.isLoading}
           onOpenDetail={setDetailId}
           onStatusChange={handleStatusChange}
+          onRemove={handleRemove}
         />
       )}
 
@@ -274,6 +276,7 @@ interface BoardListProps {
   sponsorLoading: boolean;
   onOpenDetail: (id: number) => void;
   onStatusChange: (job: SavedJob, status: SavedJobStatus) => void;
+  onRemove: (job: SavedJob) => void;
 }
 
 function BoardView({
@@ -282,6 +285,7 @@ function BoardView({
   sponsorLoading,
   onOpenDetail,
   onStatusChange,
+  onRemove,
 }: BoardListProps & { columns: { key: SavedJobStatus; label: string; jobs: SavedJob[] }[] }) {
   return (
     <div className="jt-board">
@@ -295,6 +299,18 @@ function BoardView({
             <div className="jt-column-cards">
               {col.jobs.map((job) => (
                 <div className="jt-card" key={job.id} onClick={() => onOpenDetail(job.id)}>
+                  <button
+                    type="button"
+                    className="jt-card-delete-btn"
+                    title="Remove saved job"
+                    aria-label="Remove saved job"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRemove(job);
+                    }}
+                  >
+                    <TrashIcon />
+                  </button>
                   <div className="jt-card-title">{job.jobName}</div>
                   <div className="jt-card-company">{job.companyName}</div>
                   {job.location ? (
@@ -325,7 +341,7 @@ function BoardView({
   );
 }
 
-function ListView({ jobs, sponsorMap, sponsorLoading, onOpenDetail, onStatusChange }: BoardListProps & { jobs: SavedJob[] }) {
+function ListView({ jobs, sponsorMap, sponsorLoading, onOpenDetail, onStatusChange, onRemove }: BoardListProps & { jobs: SavedJob[] }) {
   return (
     <div className="jt-list">
       <div className="jt-list-table">
@@ -348,7 +364,18 @@ function ListView({ jobs, sponsorMap, sponsorLoading, onOpenDetail, onStatusChan
             <SponsorBadge value={sponsorMap?.get(job.companyName)} loading={sponsorLoading} />
             <StatusSelect status={job.status} onChange={(next) => onStatusChange(job, next)} onClick={(e) => e.stopPropagation()} />
             <span className="jt-list-date">{relativeDate(job.dateSaved)}</span>
-            <span />
+            <button
+              type="button"
+              className="jt-list-delete-btn"
+              title="Remove saved job"
+              aria-label="Remove saved job"
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemove(job);
+              }}
+            >
+              <TrashIcon />
+            </button>
           </div>
         ))}
       </div>
