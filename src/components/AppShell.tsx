@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import type { User } from 'firebase/auth';
+import { Link, useLocation } from 'react-router-dom';
 import { signOut } from '../lib/auth';
-import { CompaniesIcon, GuidesIcon, LogoMark, SettingsIcon, TrackerIcon } from './icons';
+import { CompaniesIcon, GuidesIcon, LogoMark, ResumeIcon, SettingsIcon, TrackerIcon } from './icons';
 
 const MARKETING_SITE_URL = import.meta.env.VITE_MARKETING_SITE_URL || 'https://glancejobs.com';
 
@@ -12,6 +13,8 @@ interface AppShellProps {
 
 export function AppShell({ user, children }: AppShellProps) {
   const initial = (user?.displayName || user?.email || '?').trim().charAt(0).toUpperCase();
+  const location = useLocation();
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <div className="jt-shell">
@@ -24,10 +27,17 @@ export function AppShell({ user, children }: AppShellProps) {
         </div>
 
         <nav className="jt-nav">
-          <div className="jt-nav-item jt-nav-item-active">
+          <Link to="/" className={isActive('/') ? 'jt-nav-item jt-nav-item-active' : 'jt-nav-item'}>
             <TrackerIcon />
             Tracker
-          </div>
+          </Link>
+          <Link
+            to="/tailor-resume"
+            className={isActive('/tailor-resume') ? 'jt-nav-item jt-nav-item-active' : 'jt-nav-item'}
+          >
+            <ResumeIcon />
+            Tailor Resume
+          </Link>
           <a className="jt-nav-item" href={`${MARKETING_SITE_URL}/sponsorship-search/`}>
             <CompaniesIcon />
             Companies

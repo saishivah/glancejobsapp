@@ -9,6 +9,14 @@ export const ENDPOINTS = {
   h1bCompanyData: '/h1b/company/getH1bdata',
   // POST — batch OPT/H1B sponsor check by company name (no auth required)
   checkCompaniesV2: '/extension/check-companies-v2',
+  // GET/POST — the user's saved root resume (Firebase-authenticated)
+  resumeRoot: '/api/resume',
+  // GET — today/this-month tailor usage counters (Firebase-authenticated)
+  resumeUsage: '/api/resume/usage',
+  // GET — list of past tailored variants; GET :id for one variant's full text
+  resumeHistory: '/api/resume/history',
+  // POST — generate a tailored resume for a job description
+  resumeTailor: '/api/resume/tailor',
 } as const;
 
 export type EndpointPath = (typeof ENDPOINTS)[keyof typeof ENDPOINTS];
