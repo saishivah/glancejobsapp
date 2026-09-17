@@ -1,8 +1,9 @@
 import { useMemo, useState } from 'react';
-import { useAuth, signInWithGoogle } from '../lib/auth';
+import { useAuth } from '../lib/auth';
 import { isFirebaseConfigured } from '../lib/firebase';
 import { relativeDate } from '../lib/relativeDate';
 import { AppShell } from '../components/AppShell';
+import { SignInGate } from '../components/SignInGate';
 import { SponsorBadge } from '../components/SponsorBadge';
 import { StatusSelect, STATUSES } from '../components/StatusSelect';
 import { BoardViewIcon, CloseIcon, ListViewIcon, LocationIcon, PlusIcon, SearchIcon, TrashIcon } from '../components/icons';
@@ -25,44 +26,13 @@ export default function Tracker() {
       ) : status === 'signed-in' ? (
         <TrackerBoard />
       ) : (
-        <SignInGate configured={isFirebaseConfigured} />
+        <SignInGate
+          configured={isFirebaseConfigured}
+          title="Track jobs you're applying to"
+          description="Sign in to save jobs, track their status, and see sponsorship data for each company."
+        />
       )}
     </AppShell>
-  );
-}
-
-function SignInGate({ configured }: { configured: boolean }) {
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleGoogle = async () => {
-    setError(null);
-    setBusy(true);
-    try {
-      await signInWithGoogle();
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Sign-in failed.');
-      setBusy(false);
-    }
-  };
-
-  return (
-    <div className="jt-signin-gate">
-      <div className="jt-signin-card">
-        <h1 className="gj-h3">Track jobs you're applying to</h1>
-        {!configured ? (
-          <p>Firebase isn't configured for this environment.</p>
-        ) : (
-          <>
-            <p>Sign in to save jobs, track their status, and see sponsorship data for each company.</p>
-            <button type="button" className="gj-btn gj-btn-primary" onClick={() => void handleGoogle()} disabled={busy}>
-              {busy ? 'Opening Google…' : 'Continue with Google'}
-            </button>
-            {error ? <p className="jt-modal-error">{error}</p> : null}
-          </>
-        )}
-      </div>
-    </div>
   );
 }
 

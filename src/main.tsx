@@ -7,6 +7,7 @@ import { initAnalytics } from './lib/firebase';
 import './styles/tokens.css';
 import './styles/components.css';
 import './styles/tracker.css';
+import './styles/resume.css';
 
 void initAnalytics();
 
